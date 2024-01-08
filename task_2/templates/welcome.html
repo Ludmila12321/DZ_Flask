@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}Добро пожаловать{% endblock title %}
+
+{% block content %}
+    <h1>Добро пожаловать, {{ username }}!</h1>
+    <form action="{{ url_for('logout') }}">
+        <input type="submit" value="Выйти">
+    </form>
+{% endblock content %}
