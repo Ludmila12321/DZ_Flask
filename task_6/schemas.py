@@ -25,7 +25,7 @@ class ProductInSchema(BaseModel):
     """Модель товара без id"""
     product_name: str = Field(..., min_length=3, title='Задается название товара')
     description: str = Field(default=None, min_length=3, title='Описание товара (не обязательно)')
-    price: float = Field(..., max_length=15, title='Задается цена товара')
+    price: float = Field(..., title='Задается цена товара')
     
 class ProductSchema(ProductInSchema):
     """Модель товара с id"""
@@ -34,7 +34,7 @@ class ProductSchema(ProductInSchema):
 
 class OrderInSchema(BaseModel):
     """Модель заказа без id"""
-    order_date = datetime.date = Field(..., title='Задается дата выполнения заказа')
+    order_date: datetime.date = Field(..., title='Задается дата заказа в формате "YYYY-MM-DD"')
     status: Status = Status.IN_PROGRESS
 
 class OrderSchema(OrderInSchema):

@@ -18,7 +18,7 @@ from schemas import UserInSchema, UserSchema, ProductInSchema, ProductSchema, Or
 from models import UserModel, ProductModel, OrderModel
 from passlib.context import CryptContext
 
-app = FastAPI(title='Seminar_6, dz')
+app = FastAPI()
 app.add_event_handler("startup", startup)
 app.add_event_handler("shutdown", shutdown)
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -181,21 +181,3 @@ async def delete_order(order_id: int):
         await db.execute(query)
         return f'Заказ {order_id} удален.'
     raise HTTPException(status_code=404, detail="Заказ не найден")
-
-if __name__ == '__main__':
-    import asyncio
-
-    asyncio.run(startup())
-
-
-    async def virgin_db():
-        query = delete(UserModel)
-        await db.execute(query)
-        query = insert(UserModel)
-        for i in range(10):
-            password = pwd_context.hash(f'password{i}')
-            new_user = {"name": f"name{i}", "surname": f"surname{i}", "email": f"user{i}@mail.ru", "password": password}
-            await db.execute(query, new_user)
-
-
-    asyncio.run(virgin_db())

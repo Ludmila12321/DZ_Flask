@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Enum, Date, Boolean
+from sqlalchemy import Column, Integer, String, Enum, Date, Boolean, Float
 from sqlalchemy.ext.declarative import declarative_base
 from schemas import Status
 
@@ -26,7 +26,7 @@ class ProductModel(Base):
     id = Column(Integer, autoincrement=True, primary_key=True, index=True)
     product_name = Column(String(length=50), unique=True, index=True)
     description = Column(String(length=250), index=True)
-    price = Column(float(length=15), index=True)
+    price = Column(Float, index=True)
     is_del = Column(Boolean, nullable=False)
     
     def __str__(self):
@@ -48,4 +48,4 @@ class OrderModel(Base):
         return self.id
 
     def __repr__(self):
-        return f'Order(id={self.id}, user_id={self.user_id}, product_id={self.product_id}, order_date={self.order_date}, status={self.status})'
+        return f'Order(id={self.id}, user_id={self.user_id}, product_id={self.product_id}, status={self.status})'
